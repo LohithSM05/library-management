@@ -1,29 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Library Management System</title>
+
     <style>
         body {
             font-family: Arial;
-            text-align: center;
-            margin-top: 100px;
-            background-color: #f4f4f4;
+            margin: 40px;
+            background: #f4f4f4;
         }
 
         h1 {
             color: #333;
         }
 
-        p {
-            font-size: 20px;
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Library Management System</h1>
+<h1>Library Management System 📚</h1>
 
-    <p>Spring Boot Application Successfully Deployed on Render 🚀</p>
+<button onclick="loadBooks()">Load Books</button>
+
+<div id="output"></div>
+
+<script>
+
+async function loadBooks() {
+
+    const response = await fetch('/api/books');
+
+    const books = await response.json();
+
+    let html = "<h2>Books</h2>";
+
+    books.forEach(book => {
+
+        html += `
+            <div class="card">
+                <h3>${book.title}</h3>
+                <p><b>Author:</b> ${book.author}</p>
+                <p><b>Genre:</b> ${book.genre}</p>
+                <p><b>Available Copies:</b> ${book.availableCopies}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("output").innerHTML = html;
+}
+
+</script>
 
 </body>
+
 </html>
