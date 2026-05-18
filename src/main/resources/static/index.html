@@ -1404,7 +1404,7 @@
       });
       const tb = document.getElementById('memberList');
       tb.innerHTML = list.length ? list.map(m => {
-        const active = DB.borrows.filter(b => b.memberId === m.id && b.status === 'BORROWED').length;
+        const active = DB.borrows.filter(b => b.memberId === m.id &&(b.status === 'BORROWED' || b.status === 'OVERDUE')).length;
         return `<tr>
       <td><strong>${esc(m.name)}</strong></td><td>${esc(m.email)}</td>
       <td>${esc(m.phone || '—')}</td>
